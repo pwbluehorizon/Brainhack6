@@ -71,7 +71,7 @@ def move(game_state):
         targets.append(target)
 
     for target in targets:
-        target.x -= 0.5
+        target.x -= 50 #0.5
 
     if inside(ball):
         speed.y -= 0.35

@@ -33,7 +33,7 @@ def game_turn(game_state, parameters, server):
     server_message = get_server_message(server)
     advice = get_advice(game_state, parameters, server_message)
     update_parameters(advice, parameters)
-
+    
     move(game_state)
 
     ontimer(lambda: game_turn(game_state, parameters, server), 50)
