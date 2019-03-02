@@ -1,8 +1,9 @@
 from controler import run_game
+from server import Server
 
 
 def get_server():
-    return None
+    return Server()
 
 
 if __name__ == '__main__':
