@@ -9,4 +9,3 @@ def get_server():
 if __name__ == '__main__':
     server = get_server()
     run_game(None, server)
-    print('kwiatek')

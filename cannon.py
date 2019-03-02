@@ -71,10 +71,10 @@ def move(game_state, parameters):
         targets.append(target)
 
     for target in targets:
-        target.x -= 50 #0.5
+        target.x -= 8
 
     if inside(ball):
-        speed.y -= 0.35
+        speed.y -= 0.05
         ball.move(speed)
 
     dupe = targets.copy()
