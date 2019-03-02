@@ -63,7 +63,7 @@ def draw():
     update()
 
 
-def move(game_state):
+def move(game_state, parameters):
     "Move ball and targets."
     if randrange(enemies_frequency) == 0:
         y = randrange(-150, 150)

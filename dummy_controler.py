@@ -1,8 +1,8 @@
 from controler import run_game
-
+from class_dummy_server import DummyServer
 
 def get_server():
-    return None
+    return DummyServer()
 
 
 if __name__ == '__main__':
