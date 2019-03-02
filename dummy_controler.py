@@ -2,7 +2,7 @@ from controler import run_game
 
 
 def get_server():
-    return None
+    return None 
 
 
 if __name__ == '__main__':
