@@ -6,19 +6,19 @@ from cannon import prepare_game_state
 
 
 def prepare_parameters(configuration):
-    return None
+    return {} #TODO
 
 
 def get_server_message(server):
-    return None
+    return server.get_message()
 
 
 def get_advice(game_state, parameters, server_message):
-    pass
+    return server_message #TODO
 
 
 def update_parameters(advice, parameters):
-    pass
+    parameters['message'] = advice #TODO
 
 
 def run_game(configuration, server):

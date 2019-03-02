@@ -45,7 +45,7 @@ def inside(xy):
     return -200 < xy.x < 200 and -200 < xy.y < 200
 
 
-def draw():
+def draw(message):
     "Draw ball and targets."
     clear()
 
@@ -57,8 +57,8 @@ def draw():
         goto(ball.x, ball.y)
         dot(6, 'red')
 
-    goto(190, 190)
-    write('OK')
+    goto(170, 190)
+    write(message)
 
     update()
 
@@ -84,17 +84,8 @@ def move(game_state, parameters):
         if abs(target - ball) > 13:
             targets.append(target)
 
-    draw()
+    draw(parameters['message'])
 
     for target in targets:
         if not inside(target):
             return
-
-
-# setup(420, 420, 370, 0)
-# hideturtle()
-# up()
-# tracer(False)
-# onscreenclick(tap)
-# move()
-# done()
