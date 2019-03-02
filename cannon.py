@@ -15,7 +15,8 @@ from freegames import vector
 from turtle import *
 
 
-ball = vector(-200, -200)
+balls = []
+# ball = vector(-200, -200)
 speed = vector(0, 0)
 targets = []
 
@@ -33,9 +34,16 @@ def prepare_game_state(configuration):
 
 def tap(x, y):
     "Respond to screen tap."
-    if not inside(ball):
+    # if not inside(ball):
+    #     ball.x = -199
+    #     ball.y = -199
+    #     speed.x = (x + 200) / 25
+    #     speed.y = (y + 200) / 25
+    if len(balls) < 3:
+        ball = vector(-200, 200)
         ball.x = -199
         ball.y = -199
+        balls.append(ball)
         speed.x = (x + 200) / 25
         speed.y = (y + 200) / 25
 
@@ -53,14 +61,15 @@ def draw(parameters):
         goto(target.x, target.y)
         dot(20, 'blue')
 
-    if inside(ball):
-        goto(ball.x, ball.y)
-        dot(6, 'red')
+    for ball in balls:
+        if inside(ball):
+            goto(ball.x, ball.y)
+            dot(6, 'red')
 
     goto(170, 190)
     write(parameters['message'])
 
-    goto(140, 190)
+    goto(100, 190)
     write(parameters['speed'])
 
     update()
@@ -76,16 +85,22 @@ def move(game_state, parameters):
     for target in targets:
         target.x -= parameters['speed']
 
-    if inside(ball):
-        speed.y -= 0.05
-        ball.move(speed)
+    for ball in balls:
+        if inside(ball):
+            speed.y -= 0.05
+            ball.move(speed)
+
+    for ball in balls:
+        if not inside(ball):
+            balls.remove(ball)
 
     dupe = targets.copy()
     targets.clear()
 
     for target in dupe:
-        if abs(target - ball) > 13:
-            targets.append(target)
+        for ball in balls:
+            if inside(ball) and abs(target - ball) > 13:
+                targets.append(target)
 
     draw(parameters)
 
