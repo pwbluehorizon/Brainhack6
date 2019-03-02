@@ -45,7 +45,7 @@ def inside(xy):
     return -200 < xy.x < 200 and -200 < xy.y < 200
 
 
-def draw(message):
+def draw(parameters):
     "Draw ball and targets."
     clear()
 
@@ -58,20 +58,23 @@ def draw(message):
         dot(6, 'red')
 
     goto(170, 190)
-    write(message)
+    write(parameters['message'])
+
+    goto(140, 190)
+    write(parameters['speed'])
 
     update()
 
 
 def move(game_state, parameters):
     "Move ball and targets."
-    if randrange(enemies_frequency) == 0:
+    if randrange(parameters['enemies_frequency']) == 0:
         y = randrange(-150, 150)
         target = vector(200, y)
         targets.append(target)
 
     for target in targets:
-        target.x -= 8
+        target.x -= parameters['speed']
 
     if inside(ball):
         speed.y -= 0.05
@@ -84,7 +87,7 @@ def move(game_state, parameters):
         if abs(target - ball) > 13:
             targets.append(target)
 
-    draw(parameters['message'])
+    draw(parameters)
 
     for target in targets:
         if not inside(target):

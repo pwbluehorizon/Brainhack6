@@ -1,3 +1,4 @@
+import numpy as np
 from turtle import done
 from turtle import ontimer
 
@@ -6,7 +7,10 @@ from cannon import prepare_game_state
 
 
 def prepare_parameters(configuration):
-    return {} #TODO
+    return {
+        'speed': 1,
+        'enemies_frequency': 20,
+    }
 
 
 def get_server_message(server):
@@ -18,7 +22,9 @@ def get_advice(game_state, parameters, server_message):
 
 
 def update_parameters(advice, parameters):
-    parameters['message'] = advice #TODO
+    parameters['message'] = advice
+    parameters['speed'] = np.mean(max(1, min(10, (advice + 1) * 3), parameters['speed']))
+    parameters['enemies_frequency'] = max(2, int((advice + 1) * 30))
 
 
 def run_game(configuration, server):
