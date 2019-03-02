@@ -22,6 +22,15 @@ targets = []
 enemies_frequency = 40
 
 
+def prepare_game_state(configuration):
+    setup(420, 420, 370, 0)
+    hideturtle()
+    up()
+    tracer(False)
+    onscreenclick(tap)
+    return None
+
+
 def tap(x, y):
     "Respond to screen tap."
     if not inside(ball):
@@ -54,7 +63,7 @@ def draw():
     update()
 
 
-def move():
+def move(game_state):
     "Move ball and targets."
     if randrange(enemies_frequency) == 0:
         y = randrange(-150, 150)
@@ -81,13 +90,11 @@ def move():
         if not inside(target):
             return
 
-    ontimer(move, 50)
 
-
-setup(420, 420, 370, 0)
-hideturtle()
-up()
-tracer(False)
-onscreenclick(tap)
-move()
-done()
+# setup(420, 420, 370, 0)
+# hideturtle()
+# up()
+# tracer(False)
+# onscreenclick(tap)
+# move()
+# done()
