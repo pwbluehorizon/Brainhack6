@@ -39,10 +39,10 @@ def prepare_game_state(configuration):
 
 def tap(x, y):
     "Respond to screen tap."
-    ball.x = -399
-    ball.y = -399
-    speed.x = (x + 200) / 27
-    speed.y = (y + 200) / 27
+    ball.x = -390
+    ball.y = -390
+    speed.x = (x + 200) / 25
+    speed.y = (y + 200) / 25
     game_state['strike'] = 0
 
 
@@ -65,7 +65,7 @@ def draw(parameters, game_state):
 
     for target in targets:
         goto(target.x, target.y)
-        dot(20, target.color)
+        dot(40, target.color)
 
     if inside(ball):
         goto(ball.x, ball.y)
@@ -111,7 +111,7 @@ def move(game_state, parameters):
         if not inside(target):
             game_state['score'] -= 50
 
-        if abs(vectorized_target - ball) > 10 + parameters['ball_radius'] and inside(target):
+        if abs(vectorized_target - ball) > 20 + parameters['ball_radius'] and inside(target):
             targets.append(target)
 
     game_state['enemies_number'] = len(targets)

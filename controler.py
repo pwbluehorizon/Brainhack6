@@ -10,7 +10,7 @@ def prepare_parameters(configuration):
     return {
         'speed': 1,
         'enemies_frequency': 20,
-        'ball_radius': 3,
+        'ball_radius': 6,
     }
 
 
