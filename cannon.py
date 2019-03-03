@@ -11,6 +11,7 @@ Exercises
 
 from random import randrange
 
+import matplotlib.pyplot as plt
 from freegames import vector
 from turtle import *
 
@@ -50,13 +51,18 @@ def inside(xy):
     return -200 < xy.x < 200 and -200 < xy.y < 200
 
 
+def choose_color_based_on_bis_bas(bis_bas):
+    cmap = plt.get_cmap('plasma')
+    return cmap.colors[max(0, min(255, int((bis_bas + 3) / 6 * 256)))]
+
+
 def draw(parameters, game_state):
     "Draw ball and targets."
     clear()
 
     for target in targets:
         goto(target.x, target.y)
-        color = 'pink' if parameters['bis_bas'] > 1 else 'blue'
+        color = choose_color_based_on_bis_bas(parameters['bis_bas'])
         dot(20, color)
 
     if inside(ball):
