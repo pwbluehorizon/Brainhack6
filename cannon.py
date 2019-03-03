@@ -56,10 +56,9 @@ def draw(parameters, game_state):
 
     for target in targets:
         goto(target.x, target.y)
-        color = 'pink' if parameters['message'] > 1 else 'blue'
+        color = 'pink' if parameters['bis_bas'] > 1 else 'blue'
         dot(20, color)
-            
-        
+
     if inside(ball):
         goto(ball.x, ball.y)
         dot(parameters['ball_radius'] * 2, 'red')
