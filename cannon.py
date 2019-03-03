@@ -62,8 +62,8 @@ def draw(parameters, game_state):
 
     for target in targets:
         goto(target.x, target.y)
-        color = choose_color_based_on_bis_bas(parameters['bis_bas'])
-        dot(20, color)
+        #color = choose_color_based_on_bis_bas(parameters['bis_bas'])
+        dot(20, target.color)
 
     if inside(ball):
         goto(ball.x, ball.y)
@@ -88,7 +88,7 @@ def move(game_state, parameters):
     "Move ball and targets."
     if randrange(100) < parameters['enemies_frequency']:
         y = randrange(-150, 150)
-        target = vector(200, y)
+        target = Target(200, y, choose_color_based_on_bis_bas(parameters['bis_bas']))
         targets.append(target)
 
     for target in targets:
@@ -102,13 +102,14 @@ def move(game_state, parameters):
     targets.clear()
 
     for target in dupe:
-        if abs(target - ball) < 10 + parameters['ball_radius']:
+        vectorized_target = vector(target.x, target.y)
+        if abs(vectorized_target - ball) < 10 + parameters['ball_radius']:
             game_state['score'] += 100 + 100 * game_state['strike']
             game_state['strike'] += 1
         if not inside(target):
             game_state['score'] -= 50
 
-        if abs(target - ball) > 10 + parameters['ball_radius'] and inside(target):
+        if abs(vectorized_target - ball) > 10 + parameters['ball_radius'] and inside(target):
             targets.append(target)
 
     game_state['enemies_number'] = len(targets)
@@ -118,3 +119,11 @@ def move(game_state, parameters):
     for target in targets:
         if not inside(target):
             return
+
+
+class Target(object):
+    def __init__(self, x, y, color):
+        self.x = x
+        self.y = y
+        self.color = color
+    
