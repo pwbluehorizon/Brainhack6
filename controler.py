@@ -18,13 +18,20 @@ def get_server_message(server):
 
 
 def get_advice(game_state, parameters, server_message):
-    return server_message #TODO
+    advice = {
+        'fire_up': False,
+        'arousal': server_message,
+    }
+    if game_state['enemies_number'] < 1:
+        advice['fire_up'] = True
+
+    return advice
 
 
 def update_parameters(advice, parameters):
-    parameters['message'] = advice
-    parameters['speed'] = max(1, min(10, (advice + 3)))
-    parameters['enemies_frequency'] = int(((3 + advice) / 6) * 20)
+    parameters['message'] = advice['arousal']
+    parameters['speed'] = max(1, min(10, (advice['arousal'] + 3)))
+    parameters['enemies_frequency'] = 95 if advice['fire_up'] else int(((3 + advice['arousal']) / 6) * 5)
 
 
 def run_game(configuration, server):

@@ -19,7 +19,7 @@ ball = vector(-200, -200)
 speed = vector(0, 0)
 targets = []
 
-enemies_frequency = 40
+first_target_on_board = 0
 
 
 def prepare_game_state(configuration):
@@ -28,7 +28,9 @@ def prepare_game_state(configuration):
     up()
     tracer(False)
     onscreenclick(tap)
-    return None
+    return {
+        'enemies_number': 0,
+    }
 
 
 def tap(x, y):
@@ -83,8 +85,10 @@ def move(game_state, parameters):
     targets.clear()
 
     for target in dupe:
-        if abs(target - ball) > 13:
+        if abs(target - ball) > 13 and inside(target):
             targets.append(target)
+
+    game_state['enemies_number'] = len(targets)
 
     draw(parameters)
 
