@@ -41,8 +41,8 @@ def tap(x, y):
     "Respond to screen tap."
     ball.x = -199
     ball.y = -199
-    speed.x = (x + 200) / 25
-    speed.y = (y + 200) / 25
+    speed.x = (x + 200) / 27
+    speed.y = (y + 200) / 27
     game_state['strike'] = 0
 
 
@@ -62,7 +62,6 @@ def draw(parameters, game_state):
 
     for target in targets:
         goto(target.x, target.y)
-        #color = choose_color_based_on_bis_bas(parameters['bis_bas'])
         dot(20, target.color)
 
     if inside(ball):
