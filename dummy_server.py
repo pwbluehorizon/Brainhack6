@@ -8,7 +8,7 @@ class DummyServer:
         self.tick += 1
 
         if self.tick <= self.tick_numbers * self.tick_epoch:
-            return -3 + (self.tick // self.tick_numbers) * 0.5
+            return -3 + (self.tick // self.tick_numbers) * 0.5, -3 + (self.tick // self.tick_numbers) * 0.5
 
         value = 3 - ((self.tick - self.tick_numbers * self.tick_epoch) // self.tick_numbers) * 0.5
         if self.tick == self.tick_numbers * self.tick_epoch * 2:
