@@ -34,14 +34,14 @@ def update_parameters(advice, parameters):
     def calculate_speed_multiplier(bis_bas, arousal):
         if bis_bas > 0:
             if bis_bas < 6 - arousal:
-                return 1.01
+                return 1.05
             else:
                 return 1
         else:
             if bis_bas < - arousal:
-                return 1.02
+                return 1.1
             else:
-                return 0.99
+                return 0.95
 
     parameters['bis_bas'] = advice['bis_bas']
     parameters['arousal'] = advice['arousal']

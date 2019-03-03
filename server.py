@@ -24,8 +24,8 @@ class Server:
         print(data)
         difference = str(data).split('\\t')
         
-        return np.round(float(difference[0].strip("b'")), 2),\
-            max(0, min(6, np.round(float(difference[1].strip("b'")), 2) + 3))
+        return min(3,max(-3,np.round(float(difference[0].strip("b'")), 2))),\
+            (max(1.5, min(5.5, np.round(float(difference[1].strip("b'")), 2)))-1.5)*1.5
 
 
 def clear_buffer(sock):
