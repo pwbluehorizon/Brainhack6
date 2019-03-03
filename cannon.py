@@ -56,7 +56,7 @@ def draw(parameters):
 
     if inside(ball):
         goto(ball.x, ball.y)
-        dot(6, 'red')
+        dot(parameters['ball_radius'] * 2, 'red')
 
     goto(170, 190)
     write(parameters['message'])
@@ -88,7 +88,7 @@ def move(game_state, parameters):
     targets.clear()
 
     for target in dupe:
-        if abs(target - ball) > 13 and inside(target):
+        if abs(target - ball) > 10 + parameters['ball_radius'] and inside(target):
             targets.append(target)
 
     game_state['enemies_number'] = len(targets)

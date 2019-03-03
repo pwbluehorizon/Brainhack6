@@ -10,6 +10,7 @@ def prepare_parameters(configuration):
     return {
         'speed': 1,
         'enemies_frequency': 20,
+        'ball_radius': 4,
     }
 
 
@@ -20,6 +21,7 @@ def get_server_message(server):
 def get_advice(game_state, parameters, server_message):
     advice = {
         'fire_up': False,
+        'bis_bas': server_message[0],
         'arousal': server_message[1],
     }
     if game_state['enemies_number'] < 1:
@@ -32,6 +34,7 @@ def update_parameters(advice, parameters):
     parameters['message'] = advice['arousal']
     parameters['speed'] = max(1, min(10, (advice['arousal'] + 3)))
     parameters['enemies_frequency'] = 95 if advice['fire_up'] else int(((3 + advice['arousal']) / 6) * 5)
+    parameters['ball_radius'] = min(3, int(-advice['bis_bas']) + 4)
 
 
 def run_game(configuration, server):
