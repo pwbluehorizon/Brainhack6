@@ -56,8 +56,10 @@ def draw(parameters, game_state):
 
     for target in targets:
         goto(target.x, target.y)
-        dot(20, 'blue')
-
+        color = 'pink' if parameters['message'] > 1 else 'blue'
+        dot(20, color)
+            
+        
     if inside(ball):
         goto(ball.x, ball.y)
         dot(parameters['ball_radius'] * 2, 'red')
@@ -88,7 +90,7 @@ def move(game_state, parameters):
         target.x -= parameters['speed']
 
     if inside(ball):
-        speed.y -= 0.4
+        speed.y -= 0.2
         ball.move(speed)
 
     dupe = targets.copy()
