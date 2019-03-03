@@ -14,4 +14,4 @@ class DummyServer:
         if self.tick == self.tick_numbers * self.tick_epoch * 2:
             self.tick = 0
 
-        return value
+        return value, value

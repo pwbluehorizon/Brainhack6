@@ -1,5 +1,7 @@
 import socket
 
+import numpy as np
+
 
 class Server:
     def __init__(self, ip='127.0.0.1', port=5412):
@@ -19,7 +21,10 @@ class Server:
         self.last_value = data
         self.tick += 1
         
-        return float(data)
+        print(data)
+        difference = str(data).split('\\t')
+        
+        return np.round(float(difference[0].strip("b'")), 2), np.round(float(difference[1].strip("b'")), 2)
 
 
 def clear_buffer(sock):

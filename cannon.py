@@ -63,6 +63,9 @@ def draw(parameters):
 
     goto(140, 190)
     write(parameters['speed'])
+    
+    goto(100, 190)
+    write('OK')
 
     update()
 

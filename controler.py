@@ -20,7 +20,7 @@ def get_server_message(server):
 def get_advice(game_state, parameters, server_message):
     advice = {
         'fire_up': False,
-        'arousal': server_message,
+        'arousal': server_message[1],
     }
     if game_state['enemies_number'] < 1:
         advice['fire_up'] = True
