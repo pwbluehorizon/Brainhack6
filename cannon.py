@@ -16,7 +16,7 @@ from freegames import vector
 from turtle import *
 
 
-ball = vector(-200, -200)
+ball = vector(-400, -400)
 speed = vector(0, 0)
 targets = []
 
@@ -29,7 +29,7 @@ game_state = {
 
 
 def prepare_game_state(configuration):
-    setup(420, 420, 370, 0)
+    setup(820, 820, 370, 0)
     hideturtle()
     up()
     tracer(False)
@@ -39,8 +39,8 @@ def prepare_game_state(configuration):
 
 def tap(x, y):
     "Respond to screen tap."
-    ball.x = -199
-    ball.y = -199
+    ball.x = -399
+    ball.y = -399
     speed.x = (x + 200) / 27
     speed.y = (y + 200) / 27
     game_state['strike'] = 0
@@ -48,7 +48,7 @@ def tap(x, y):
 
 def inside(xy):
     "Return True if xy within screen."
-    return -200 < xy.x < 200 and -200 < xy.y < 200
+    return -400 < xy.x < 400 and -400 < xy.y < 400
 
 
 def choose_color_based_on_bis_bas(bis_bas):
@@ -58,6 +58,9 @@ def choose_color_based_on_bis_bas(bis_bas):
 
 def draw(parameters, game_state):
     "Draw ball and targets."
+    def write_(s):
+        write(s, font=("Arial", 16, "normal"))
+
     clear()
 
     for target in targets:
@@ -68,17 +71,17 @@ def draw(parameters, game_state):
         goto(ball.x, ball.y)
         dot(parameters['ball_radius'] * 2, 'red')
 
-    goto(0, 190)
-    write('{}:({})'.format(game_state['score'], game_state['strike']))
+    goto(-300, 370)
+    write_('Score {}:({})'.format(game_state['score'], game_state['strike']))
 
-    goto(50, 190)
-    write('S: {}'.format(parameters['speed']))
+    goto(-100, 370)
+    write_('S: {}'.format(parameters['speed']))
 
-    goto(100, 190)
-    write('BB: {}'.format(parameters['bis_bas']))
+    goto(100, 370)
+    write_('BB: {}'.format(parameters['bis_bas']))
 
-    goto(150, 190)
-    write('A: {}'.format(parameters['arousal']))
+    goto(300, 370)
+    write_('A: {}'.format(parameters['arousal']))
 
     update()
 
@@ -86,8 +89,8 @@ def draw(parameters, game_state):
 def move(game_state, parameters):
     "Move ball and targets."
     if randrange(100) < parameters['enemies_frequency']:
-        y = randrange(-150, 150)
-        target = Target(200, y, choose_color_based_on_bis_bas(parameters['bis_bas']))
+        y = randrange(-350, 350)
+        target = Target(400, y, choose_color_based_on_bis_bas(parameters['bis_bas']))
         targets.append(target)
 
     for target in targets:
@@ -125,4 +128,3 @@ class Target(object):
         self.x = x
         self.y = y
         self.color = color
-    
