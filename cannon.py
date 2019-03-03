@@ -41,8 +41,8 @@ def tap(x, y):
     "Respond to screen tap."
     ball.x = -390
     ball.y = -390
-    speed.x = (x + 200) / 25
-    speed.y = (y + 200) / 25
+    speed.x = (x + 400) / 27
+    speed.y = (y + 400) / 27
     game_state['strike'] = 0
 
 
