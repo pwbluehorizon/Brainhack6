@@ -24,7 +24,7 @@ def get_advice(game_state, parameters, server_message):
 def update_parameters(advice, parameters):
     parameters['message'] = advice
     parameters['speed'] = max(1, min(10, (advice + 3)))
-    parameters['enemies_frequency'] = max(2, int(100 / (4 + advice)))
+    parameters['enemies_frequency'] = int(((3 + advice) / 6) * 20)
 
 
 def run_game(configuration, server):

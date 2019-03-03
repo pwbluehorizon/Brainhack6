@@ -67,7 +67,7 @@ def draw(parameters):
 
 def move(game_state, parameters):
     "Move ball and targets."
-    if randrange(parameters['enemies_frequency']) == 0:
+    if randrange(100) < parameters['enemies_frequency']:
         y = randrange(-150, 150)
         target = vector(200, y)
         targets.append(target)
