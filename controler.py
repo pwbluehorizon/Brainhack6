@@ -24,7 +24,7 @@ def get_advice(game_state, parameters, server_message):
         'bis_bas': server_message[0],
         'arousal': server_message[1],
     }
-    if game_state['enemies_number'] < 1:
+    if game_state['enemies_number'] < 3:
         advice['fire_up'] = True
 
     return advice
