@@ -58,14 +58,14 @@ def draw(parameters):
         goto(ball.x, ball.y)
         dot(parameters['ball_radius'] * 2, 'red')
 
-    goto(170, 190)
-    write(parameters['message'])
+    goto(50, 190)
+    write('S: {}'.format(parameters['speed']))
 
-    goto(140, 190)
-    write(parameters['speed'])
-    
     goto(100, 190)
-    write('OK')
+    write('BB: {}'.format(parameters['bis_bas']))
+
+    goto(150, 190)
+    write('A: {}'.format(parameters['arousal']))
 
     update()
 

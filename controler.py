@@ -31,9 +31,23 @@ def get_advice(game_state, parameters, server_message):
 
 
 def update_parameters(advice, parameters):
-    parameters['message'] = advice['arousal']
-    parameters['speed'] = max(1, min(10, (max(0,(advice['arousal']+2))*2)))
-    parameters['enemies_frequency'] = 95 if advice['fire_up'] else int(((2 + advice['arousal']) ) * 3)
+    def calculate_speed_multiplier(bis_bas, arousal):
+        if bis_bas > 0:
+            if bis_bas < 6 - arousal:
+                return 1.01
+            else:
+                return 1
+        else:
+            if bis_bas < - arousal:
+                return 1.02
+            else:
+                return 0.99
+
+    parameters['bis_bas'] = advice['bis_bas']
+    parameters['arousal'] = advice['arousal']
+    new_speed = np. round(parameters['speed'] * calculate_speed_multiplier(advice['bis_bas'], advice['arousal']), 2)
+    parameters['speed'] = max(1, min(10, new_speed))
+    parameters['enemies_frequency'] = 95 if advice['fire_up'] else int(advice['arousal'] * 2)
 
 
 def run_game(configuration, server):
