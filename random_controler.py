@@ -1,9 +1,9 @@
 from controler import run_game
-from scripted_server import ScriptedServer
+from random_server import RandomServer
 
 
 def get_server():
-    return ScriptedServer()
+    return RandomServer()
 
 
 if __name__ == '__main__':
