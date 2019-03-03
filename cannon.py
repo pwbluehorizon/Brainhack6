@@ -20,6 +20,11 @@ speed = vector(0, 0)
 targets = []
 
 first_target_on_board = 0
+game_state = {
+    'enemies_number': 0,
+    'score': 0,
+    'strike': 0,
+}
 
 
 def prepare_game_state(configuration):
@@ -28,9 +33,7 @@ def prepare_game_state(configuration):
     up()
     tracer(False)
     onscreenclick(tap)
-    return {
-        'enemies_number': 0,
-    }
+    return game_state
 
 
 def tap(x, y):
@@ -39,6 +42,7 @@ def tap(x, y):
     ball.y = -199
     speed.x = (x + 200) / 25
     speed.y = (y + 200) / 25
+    game_state['strike'] = 0
 
 
 def inside(xy):
@@ -46,7 +50,7 @@ def inside(xy):
     return -200 < xy.x < 200 and -200 < xy.y < 200
 
 
-def draw(parameters):
+def draw(parameters, game_state):
     "Draw ball and targets."
     clear()
 
@@ -57,6 +61,9 @@ def draw(parameters):
     if inside(ball):
         goto(ball.x, ball.y)
         dot(parameters['ball_radius'] * 2, 'red')
+
+    goto(0, 190)
+    write('{}:({})'.format(game_state['score'], game_state['strike']))
 
     goto(50, 190)
     write('S: {}'.format(parameters['speed']))
@@ -88,12 +95,18 @@ def move(game_state, parameters):
     targets.clear()
 
     for target in dupe:
+        if abs(target - ball) < 10 + parameters['ball_radius']:
+            game_state['score'] += 100 + 100 * game_state['strike']
+            game_state['strike'] += 1
+        if not inside(target):
+            game_state['score'] -= 50
+
         if abs(target - ball) > 10 + parameters['ball_radius'] and inside(target):
             targets.append(target)
 
     game_state['enemies_number'] = len(targets)
 
-    draw(parameters)
+    draw(parameters, game_state)
 
     for target in targets:
         if not inside(target):
