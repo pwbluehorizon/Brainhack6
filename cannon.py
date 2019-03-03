@@ -76,7 +76,7 @@ def move(game_state, parameters):
         target.x -= parameters['speed']
 
     if inside(ball):
-        speed.y -= 0.5
+        speed.y -= 0.4
         ball.move(speed)
 
     dupe = targets.copy()
